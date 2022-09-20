@@ -34,12 +34,9 @@ const App = ()=>{
         <div>
              <Navbar  totalItems={cart.total_items} />  
              <Routes>
-             <Route exact path="/product" element={<Products  products={products} onAddToCart={handleAddToCart} />}/>
-              
-              <Route exact path="/cart" element={<Cart cart={cart} />}/>
-
+                  <Route exact path="/" element={ <Products  products={products} onAddToCart={handleAddToCart} />} />
+                  <Route exact path="/cart" element={ <Cart cart={cart} />} />
               </Routes>
-
         </div> 
 
         </Router>
