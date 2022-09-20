@@ -3,9 +3,9 @@ import { Card, CardMedia, CardContent, CardActions, Typography, IconButton } fro
 import { AddShoppingCart } from '@material-ui/icons';
 import useStyles from './style'; 
 
-function Product({product}) { //{product} props are destructures 
+function Product({product,onAddToCart  }) { //{product} props are destructures 
     const classes = useStyles();
-    console.log(product);
+    const handleAddToCart = () => onAddToCart(product.id, 1);
   return (
         <Card className={'classes.root'}>
             <CardMedia className={classes.media} image={product.image.url} title={product.title}/>
@@ -21,9 +21,9 @@ function Product({product}) { //{product} props are destructures
                 <Typography dangerouslySetInnerHTML={{__html: product.description}} variant='body2' color="textSecondary" />
             </CardContent>
             <CardActions disableSpacing className={classes.cardActions}>
-        <IconButton aria-label="Add to Cart">
-          <AddShoppingCart />
-        </IconButton>
+            <IconButton aria-label="Add to Cart" onClick={handleAddToCart}>
+                <AddShoppingCart />
+            </IconButton>
       </CardActions>
 
         </Card>
