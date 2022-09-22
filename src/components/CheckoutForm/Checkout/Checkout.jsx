@@ -12,7 +12,7 @@ const Confirmation = ()=>(
 )
 const Checkout = ()=>{
 const classes = useStyles();
-    const [activeStep,setActiveStep] = useState(2);
+    const [activeStep,setActiveStep] = useState(0);
     const Form = ()=>activeStep === 0 
     ?<AddressForm />
     :<PaymentForm />
