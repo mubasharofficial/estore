@@ -12,12 +12,14 @@ const Confirmation = ()=>(
 )
 const Checkout = ({cart})=>{
 const classes = useStyles();
-const [checkoutToken,setCheckoutToken] = useState(null);
+const [checkoutToken,setCheckoutToken] = useState({});
+
+
+
     useEffect(()=>{
         const generateToken = async ()=>{
             try{
                  const token =  await commerce.checkout.generateToken(cart.id,{type:'cart'});
-                 console.log(token);
                  setCheckoutToken(token);
             }
             catch(error)
@@ -25,10 +27,12 @@ const [checkoutToken,setCheckoutToken] = useState(null);
 
             }
         }
-    },[])
+        generateToken();
+    },[cart])
+
     const [activeStep,setActiveStep] = useState(0);
     const Form = ()=>activeStep === 0 
-    ?<AddressForm />
+    ?<AddressForm  checkoutToken={checkoutToken} />
     :<PaymentForm />
 
     return(
@@ -46,7 +50,7 @@ const [checkoutToken,setCheckoutToken] = useState(null);
             ))
         }
         </Stepper>
-        {activeStep===steps.length ? <Confirmation />: <Form/>}
+        {activeStep===steps.length ? <Confirmation />: checkoutToken && <Form/>}
         </Paper>
         </main>
         
